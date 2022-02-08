@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: "Vollkorn", Georgia, Serif;
 }
 
@@ -20,6 +21,8 @@ span {
   display: block;
 }
 a {
+  margin: 0;
+  padding: 0;
   text-decoration: none;
 }
 img {
@@ -37,9 +40,14 @@ p {
 .areas {
   display: grid;
   grid-template-columns: minmax(160px, 1fr) 3fr 300px;
+  grid-template-areas:
+    "header header header"
+    "sidenav content anuncios"
+    "footer footer footer";
 }
 
 .header-bg {
+  grid-area: header;
   background: linear-gradient(to right, #8844ee, #b07dfb);
 }
 
@@ -91,9 +99,13 @@ p {
   background: #fafbfc;
 }
 .side-menu {
+  grid-area: sidenav;
   padding: 30px;
 }
-.side-menu-item a {
+.side-menu a:hover {
+  background-color: #b07dfb;
+}
+.side-menu-item {
   display: block;
   margin: 0 auto 30px auto;
   padding: 24px;
@@ -105,12 +117,14 @@ p {
 }
 
 .conteudo {
+  grid-area: content;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
   padding: 20px 40px;
   align-items: center;
   max-width: 900px;
+  margin: 0 auto;
 }
 
 .titulo {
@@ -191,9 +205,9 @@ p {
 }
 
 .anuncios {
+  grid-area: anuncios;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  grid-column: 3;
   padding: 30px;
   gap: 30px;
   background: #fafbfc;
@@ -201,11 +215,50 @@ p {
   justify-content: space-around;
 }
 .footer {
-  grid-column: 1/-1;
+  grid-area: footer;
   background: linear-gradient(135deg, #8844ee, #b07dfb);
 }
 .footer p {
   color: white;
   text-align: center;
   padding: 30px;
+}
+
+@media (max-width: 1200px) {
+  .areas {
+    grid-template-areas:
+      "header header header"
+      "sidenav content content"
+      "sidenav anuncios anuncios"
+      "footer footer footer";
+  }
+}
+@media (max-width: 800px) {
+  .areas {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "sidenav"
+      "content"
+      "anuncios"
+      "footer";
+  }
+  .side-menu-bg {
+    overflow-x: scroll;
+  }
+  .side-menu {
+    padding: 30px;
+  }
+  .side-menu ul {
+    display: flex;
+    gap: 40px;
+  }
+  .side-menu-item {
+    margin: 0;
+  }
+}
+@media (max-width: 800px) {
+  .conteudo {
+    grid-template-columns: 1fr;
+  }
 }
